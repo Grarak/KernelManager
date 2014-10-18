@@ -28,8 +28,21 @@
             ],
             "boot": "/dev/block/mmcblk0p9"
 
-        }
+        },
+        {
 
+            "codenames": [ "yuga", "C6603", "C6602", "C6606" ],
+            "kernels": [
+                {
+                    "name": "HodorKernel",
+                    "json": "http://www.team-simplicit.com/manifests/hodor/manifest.json",
+                    "description": "A kernel for Stock-based 4.4.4 ROMs (.283)"
+                }
+
+            ],
+            "boot": "/dev/block/platform/msm_sdcc.1/by-name/boot"
+
+        }
     ]
 
 }
