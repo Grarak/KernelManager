@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- inherit from the material theme -->
+    <style name="AppTheme" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">@android:color/holo_red_dark</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:colorPrimaryDark">@android:color/holo_red_light</item>
+        <item name="android:colorAccent">@android:color/holo_red_light</item>
+    </style>
+
+</resources>

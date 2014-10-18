@@ -1,0 +1,11 @@
+<uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ptr_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <it.gmariotti.cardslib.library.view.CardListView
+        android:id="@+id/listview"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+</uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>

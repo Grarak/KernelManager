@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tabs -->
+    <string-array name="tabs_arrays">
+        <item>@string/info</item>
+        <item>@string/download</item>
+        <item>@string/install</item>
+        <item>@string/backup</item>
+    </string-array>
+
+</resources>

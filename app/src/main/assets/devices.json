@@ -1,0 +1,35 @@
+{
+
+    "devices": [
+
+        {
+
+            "codenames": [ "a5", "a5chl", "a5ul", "a5dwg", "a5dug", "htc_a5", "htc_a5chl", "htc_a5ul", "htc_a5dwg", "htc_a5dug" ],
+            "kernels": [
+                {
+                    "name": "GraKernel",
+                    "json": "https://raw.githubusercontent.com/Grarak/grarak.github.io/master/grakernel/desire816.json",
+                    "description": "A Kernel by Grarak"
+                }
+
+            ],
+            "boot": "/dev/block/platform/msm_sdcc.1/by-name/boot"
+
+        },
+        {
+
+            "codenames": [ "i9103", "GT-I9103", "galaxyr" ],
+            "kernels": [
+                {
+                    "name": "GraKernel",
+                    "json": "https://raw.githubusercontent.com/Grarak/grarak.github.io/master/grakernel/galaxyr.json",
+                    "description": "A Kernel by Grarak"
+                }
+            ],
+            "boot": "/dev/block/mmcblk0p9"
+
+        }
+
+    ]
+
+}
