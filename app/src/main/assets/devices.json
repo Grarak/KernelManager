@@ -42,6 +42,20 @@
             ],
             "boot": "/dev/block/platform/msm_sdcc.1/by-name/boot"
 
+        },
+        {
+
+            "codenames": [ "sirius", "D6502", "D6503" ],
+            "kernels": [
+                {
+                    "name": "M5-Kernel",
+                    "json": "https://raw.githubusercontent.com/Myself5/M5-Kernel-KernelManager/master/KernelManager.json",
+                    "description": "Custom Kernel for CM/AOSP based Custom Roms for the XZ2"
+                }
+
+            ],
+            "boot": "/dev/block/platform/msm_sdcc.1/by-name/boot"
+
         }
     ]
 
