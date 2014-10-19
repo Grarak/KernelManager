@@ -64,7 +64,9 @@ public class NavigationDrawerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTitle = getString(R.string.app_name);
-        getActionBar().setTitle(getResources().getStringArray(R.array.tabs_arrays)[mCurrentSelectedPosition]);
+        ActionBar actionBar = getActionBar();
+        String title = getResources().getStringArray(R.array.tabs_arrays)[mCurrentSelectedPosition];
+        if (actionBar != null && title != null) actionBar.setTitle(title);
 
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
         // drawer. See PREF_USER_LEARNED_DRAWER for details.
