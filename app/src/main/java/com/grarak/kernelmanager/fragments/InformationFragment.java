@@ -32,7 +32,7 @@ public class InformationFragment extends Fragment implements Constants {
         listView = new CardListView(getActivity());
         mJsonDevicesArrays = new JsonDeviceArrays(mUtils.getDeviceAssetFile(getActivity()));
 
-        if (isAdded()) new Handler().postDelayed(run, 100);
+        getActivity().runOnUiThread(run);
 
         return listView;
     }
@@ -40,6 +40,17 @@ public class InformationFragment extends Fragment implements Constants {
     private final Runnable run = new Runnable() {
         @Override
         public void run() {
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
 
             ArrayList<Card> cards = new ArrayList<Card>();
 
