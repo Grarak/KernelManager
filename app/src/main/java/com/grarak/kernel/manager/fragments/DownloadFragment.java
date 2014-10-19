@@ -1,4 +1,4 @@
-package com.grarak.kernelmanager.fragments;
+package com.grarak.kernel.manager.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -11,16 +11,16 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.grarak.kernelmanager.DownloadActivity;
-import com.grarak.kernelmanager.MoreActivity;
-import com.grarak.kernelmanager.R;
-import com.grarak.kernelmanager.elements.CustomCard.CardButtonExpand;
-import com.grarak.kernelmanager.elements.CustomCard.DescriptionCard;
-import com.grarak.kernelmanager.elements.CustomCardArrayAdapter;
-import com.grarak.kernelmanager.utils.Constants;
-import com.grarak.kernelmanager.utils.JsonUtils.JsonDeviceArrays;
-import com.grarak.kernelmanager.utils.JsonUtils.JsonListArrays;
-import com.grarak.kernelmanager.utils.WebpageReaderTask;
+import com.grarak.kernel.manager.DownloadActivity;
+import com.grarak.kernel.manager.MoreActivity;
+import com.grarak.kernel.manager.R;
+import com.grarak.kernel.manager.elements.CustomCard.CardButtonExpand;
+import com.grarak.kernel.manager.elements.CustomCard.DescriptionCard;
+import com.grarak.kernel.manager.elements.CustomCardArrayAdapter;
+import com.grarak.kernel.manager.utils.Constants;
+import com.grarak.kernel.manager.utils.JsonUtils.JsonDeviceArrays;
+import com.grarak.kernel.manager.utils.JsonUtils.JsonListArrays;
+import com.grarak.kernel.manager.utils.WebpageReaderTask;
 
 import java.util.ArrayList;
 import java.util.List;

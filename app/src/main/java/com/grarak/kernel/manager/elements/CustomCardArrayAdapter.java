@@ -1,4 +1,4 @@
-package com.grarak.kernelmanager.elements;
+package com.grarak.kernel.manager.elements;
 
 import android.app.Activity;
 import android.content.Context;

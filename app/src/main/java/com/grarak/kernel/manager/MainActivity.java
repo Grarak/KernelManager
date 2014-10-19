@@ -1,4 +1,4 @@
-package com.grarak.kernelmanager;
+package com.grarak.kernel.manager;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 
-import com.grarak.kernelmanager.fragments.NavigationDrawerFragment;
-import com.grarak.kernelmanager.fragments.NoSupportFragment;
-import com.grarak.kernelmanager.utils.Constants;
-import com.grarak.kernelmanager.utils.JsonUtils.JsonDeviceArrays;
+import com.grarak.kernel.manager.fragments.NavigationDrawerFragment;
+import com.grarak.kernel.manager.fragments.NoSupportFragment;
+import com.grarak.kernel.manager.utils.Constants;
+import com.grarak.kernel.manager.utils.JsonUtils.JsonDeviceArrays;
 
 
 public class MainActivity extends Activity

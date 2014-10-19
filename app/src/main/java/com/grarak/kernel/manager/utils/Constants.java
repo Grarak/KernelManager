@@ -1,11 +1,11 @@
-package com.grarak.kernelmanager.utils;
+package com.grarak.kernel.manager.utils;
 
 import android.os.Environment;
 
-import com.grarak.kernelmanager.fragments.BackupFragment;
-import com.grarak.kernelmanager.fragments.DownloadFragment;
-import com.grarak.kernelmanager.fragments.InformationFragment;
-import com.grarak.kernelmanager.fragments.InstallFragment;
+import com.grarak.kernel.manager.fragments.BackupFragment;
+import com.grarak.kernel.manager.fragments.DownloadFragment;
+import com.grarak.kernel.manager.fragments.InformationFragment;
+import com.grarak.kernel.manager.fragments.InstallFragment;
 
 /**
  * Created by grarak on 11.10.14.

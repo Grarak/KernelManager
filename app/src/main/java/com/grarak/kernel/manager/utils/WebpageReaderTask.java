@@ -1,4 +1,4 @@
-package com.grarak.kernelmanager.utils;
+package com.grarak.kernel.manager.utils;
 
 import android.os.AsyncTask;
 import android.text.Html;

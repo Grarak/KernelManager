@@ -1,4 +1,4 @@
-package com.grarak.kernelmanager.tasks;
+package com.grarak.kernel.manager.tasks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.os.AsyncTask;
 import android.os.PowerManager;
 import android.util.Log;
 
-import com.grarak.kernelmanager.R;
-import com.grarak.kernelmanager.utils.Constants;
+import com.grarak.kernel.manager.R;
+import com.grarak.kernel.manager.utils.Constants;
 
 import java.io.File;
 import java.io.FileOutputStream;

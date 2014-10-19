@@ -1,17 +1,16 @@
-package com.grarak.kernelmanager.fragments;
+package com.grarak.kernel.manager.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.grarak.kernelmanager.R;
-import com.grarak.kernelmanager.elements.CustomCard.DescriptionCard;
-import com.grarak.kernelmanager.elements.CustomCardArrayAdapter;
-import com.grarak.kernelmanager.utils.Constants;
-import com.grarak.kernelmanager.utils.JsonUtils.JsonDeviceArrays;
+import com.grarak.kernel.manager.R;
+import com.grarak.kernel.manager.elements.CustomCard.DescriptionCard;
+import com.grarak.kernel.manager.elements.CustomCardArrayAdapter;
+import com.grarak.kernel.manager.utils.Constants;
+import com.grarak.kernel.manager.utils.JsonUtils.JsonDeviceArrays;
 
 import java.util.ArrayList;
 

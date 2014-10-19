@@ -1,4 +1,4 @@
-package com.grarak.kernelmanager;
+package com.grarak.kernel.manager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,13 +6,13 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.grarak.kernelmanager.elements.CustomCard.DescriptionCard;
-import com.grarak.kernelmanager.elements.CustomCardArrayAdapter;
-import com.grarak.kernelmanager.tasks.DownloadTask;
-import com.grarak.kernelmanager.utils.Constants;
-import com.grarak.kernelmanager.utils.JsonUtils.JsonDownloadArrays;
-import com.grarak.kernelmanager.utils.Utils;
-import com.grarak.kernelmanager.utils.WebpageReaderTask;
+import com.grarak.kernel.manager.elements.CustomCard.DescriptionCard;
+import com.grarak.kernel.manager.elements.CustomCardArrayAdapter;
+import com.grarak.kernel.manager.tasks.DownloadTask;
+import com.grarak.kernel.manager.utils.Constants;
+import com.grarak.kernel.manager.utils.JsonUtils.JsonDownloadArrays;
+import com.grarak.kernel.manager.utils.Utils;
+import com.grarak.kernel.manager.utils.WebpageReaderTask;
 
 import java.util.ArrayList;
 

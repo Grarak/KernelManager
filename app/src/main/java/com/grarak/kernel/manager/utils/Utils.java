@@ -1,4 +1,4 @@
-package com.grarak.kernelmanager.utils;
+package com.grarak.kernel.manager.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.grarak.kernelmanager.R;
+import com.grarak.kernel.manager.R;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

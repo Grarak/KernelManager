@@ -1,4 +1,4 @@
-package com.grarak.kernelmanager.fragments;
+package com.grarak.kernel.manager.fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -14,12 +14,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.grarak.kernelmanager.R;
-import com.grarak.kernelmanager.elements.CustomCard;
-import com.grarak.kernelmanager.elements.CustomCardArrayAdapter;
-import com.grarak.kernelmanager.utils.Constants;
-import com.grarak.kernelmanager.utils.JsonUtils.JsonDeviceArrays;
-import com.grarak.kernelmanager.utils.Utils;
+import com.grarak.kernel.manager.R;
+import com.grarak.kernel.manager.elements.CustomCard;
+import com.grarak.kernel.manager.elements.CustomCardArrayAdapter;
+import com.grarak.kernel.manager.utils.Constants;
+import com.grarak.kernel.manager.utils.JsonUtils.JsonDeviceArrays;
+import com.grarak.kernel.manager.utils.Utils;
 import com.stericson.RootTools.RootTools;
 
 import java.io.File;

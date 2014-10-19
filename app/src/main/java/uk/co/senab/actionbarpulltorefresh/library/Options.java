@@ -16,7 +16,7 @@
 
 package uk.co.senab.actionbarpulltorefresh.library;
 
-import com.grarak.kernelmanager.R;
+import com.grarak.kernel.manager.R;
 
 /**
  * Allows you to specify a number of configuration options when setting up a {@link PullToRefreshLayout}.

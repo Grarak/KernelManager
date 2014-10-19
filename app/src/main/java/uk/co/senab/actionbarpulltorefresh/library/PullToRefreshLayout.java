@@ -27,7 +27,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.grarak.kernelmanager.R;
+import com.grarak.kernel.manager.R;
 
 import uk.co.senab.actionbarpulltorefresh.library.listeners.HeaderViewListener;
 import uk.co.senab.actionbarpulltorefresh.library.viewdelegates.ViewDelegate;
