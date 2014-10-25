@@ -56,7 +56,7 @@
             ],
             "boot": "/dev/block/platform/msm_sdcc.1/by-name/boot"
 
-        }
+        },
         {
             
             "codenames": ["tate"],
@@ -67,8 +67,8 @@
                     "description": "Fastcharge enabled kernel for the Kindle fire HD 7 " 
                 }
                 
-                ],
-                "boot": "/dev/block/omap/omap_hsmmc.1/by-name/boot"
+            ],
+            "boot": "/dev/block/omap/omap_hsmmc.1/by-name/boot"
         }
     ]
 
