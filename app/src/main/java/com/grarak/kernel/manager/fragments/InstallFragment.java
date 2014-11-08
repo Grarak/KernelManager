@@ -2,9 +2,11 @@ package com.grarak.kernel.manager.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.grarak.kernel.manager.R;
 import com.grarak.kernel.manager.elements.CustomCard.CardButtonExpand;
@@ -20,9 +22,6 @@ import java.util.ArrayList;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.ViewToClickToExpand;
 import it.gmariotti.cardslib.library.view.CardListView;
-import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
-import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 
 /**
  * Created by grarak on 14.10.14.
@@ -33,36 +32,40 @@ public class InstallFragment extends Fragment implements Constants {
 
     private ArrayList<Card> cards = new ArrayList<Card>();
     private CustomCardArrayAdapter mCardArrayAdapter;
-    private PullToRefreshLayout mPullToRefreshLayout;
+    private SwipeRefreshLayout refreshLayout;
     private CardListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_card_listview, container, false);
-        listView = (CardListView) view.findViewById(R.id.listview);
+        LinearLayout layout = new LinearLayout(getActivity());
 
-        mPullToRefreshLayout = (PullToRefreshLayout) view.findViewById(R.id.ptr_layout);
-        ActionBarPullToRefresh.from(getActivity())
-                .allChildrenArePullable()
-                .listener(new OnRefreshListener() {
-                    @Override
-                    public void onRefreshStarted(View view) {
-                        refresh();
-                    }
-                })
-                .setup(mPullToRefreshLayout);
+        refreshLayout = new SwipeRefreshLayout(getActivity());
+        refreshLayout.setColorSchemeColors(getResources().getColor(android.R.color.holo_red_dark));
+
+        layout.addView(refreshLayout);
+
+        listView = new CardListView(getActivity());
+
+        refreshLayout.addView(listView);
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
 
         getActivity().runOnUiThread(run);
 
-        return view;
+        return layout;
     }
 
     private void refresh() {
         refresh = true;
-        mPullToRefreshLayout.setRefreshing(true);
+        refreshLayout.setRefreshing(true);
         getActivity().runOnUiThread(run);
-        mPullToRefreshLayout.setRefreshComplete();
+        refreshLayout.setRefreshing(false);
     }
 
     private final Runnable run = new Runnable() {

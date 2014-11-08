@@ -1,10 +1,11 @@
 package com.grarak.kernel.manager;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.LinearLayout;
 
 import com.grarak.kernel.manager.elements.CustomCard.DescriptionCard;
 import com.grarak.kernel.manager.elements.CustomCardArrayAdapter;
@@ -18,14 +19,11 @@ import java.util.ArrayList;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.CardListView;
-import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
-import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 
 /**
  * Created by grarak on 12.10.14.
  */
-public class DownloadActivity extends Activity implements Constants {
+public class DownloadActivity extends ActionBarActivity implements Constants {
 
     public static final String ARG_KERNEL_NAME = "kernelname";
     public static final String ARG_JSON = "json";
@@ -46,31 +44,33 @@ public class DownloadActivity extends Activity implements Constants {
         super.onCreate(savedInstanceState);
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         KERNEL_NAME = getIntent().getExtras().getString(ARG_KERNEL_NAME);
         JSON = getIntent().getExtras().getString(ARG_JSON);
         JSON_LINK = getIntent().getExtras().getString(ARG_JSON_LINK);
         mJsonDownloadArrays = new JsonDownloadArrays(JSON);
 
-        getActionBar().setTitle(KERNEL_NAME);
+        getSupportActionBar().setTitle(KERNEL_NAME);
+
+        LinearLayout layout = new LinearLayout(this);
+
+        final SwipeRefreshLayout refreshLayout = new SwipeRefreshLayout(this);
+        refreshLayout.setColorSchemeColors(getResources().getColor(android.R.color.holo_red_dark));
+        layout.addView(refreshLayout);
 
         listView = new CardListView(this);
 
-        final PullToRefreshLayout layout = new PullToRefreshLayout(this);
-        layout.addView(listView);
+        refreshLayout.addView(listView);
 
-        ActionBarPullToRefresh.from(this)
-                .allChildrenArePullable()
-                .listener(new OnRefreshListener() {
-                    @Override
-                    public void onRefreshStarted(View view) {
-                        refresh = true;
-                        runOnUiThread(run);
-                        layout.setRefreshComplete();
-                    }
-                })
-                .setup(layout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh = true;
+                runOnUiThread(run);
+                refreshLayout.setRefreshing(false);
+            }
+        });
 
         setContentView(layout);
 

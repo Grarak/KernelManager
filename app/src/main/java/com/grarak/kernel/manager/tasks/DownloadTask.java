@@ -82,6 +82,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> implements 
         mWakeLock.release();
         mProgressDialog.dismiss();
 
+        if (result != null) new File(downloadPath + "/" + downloadFileName).delete();
         listener.downloadFinish(result == null ? DownloadStatus.SUCCESS : DownloadStatus.FAILED);
     }
 

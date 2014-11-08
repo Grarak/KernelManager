@@ -3,13 +3,11 @@ package com.grarak.kernel.manager.fragments;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import com.grarak.kernel.manager.DownloadActivity;
 import com.grarak.kernel.manager.MoreActivity;
@@ -36,18 +34,30 @@ public class DownloadFragment extends Fragment implements Constants {
 
     private JsonDeviceArrays mJsonDeviceArrays;
 
+    private SwipeRefreshLayout refreshLayout;
     private CardListView listView;
     private List<String> kernels = new ArrayList<String>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        LinearLayout layout = new LinearLayout(getActivity());
+
+        refreshLayout = new SwipeRefreshLayout(getActivity());
+        refreshLayout.setEnabled(false);
+        refreshLayout.setColorSchemeColors(getResources().getColor(android.R.color.holo_red_dark));
+
+        layout.addView(refreshLayout);
+
         listView = new CardListView(getActivity());
+
+        refreshLayout.addView(listView);
+
         mJsonDeviceArrays = new JsonDeviceArrays(mUtils.getDeviceAssetFile(getActivity()));
 
         getActivity().runOnUiThread(run);
 
-        return listView;
+        return layout;
     }
 
     private final Runnable run = new Runnable() {
@@ -94,26 +104,11 @@ public class DownloadFragment extends Fragment implements Constants {
     };
 
     private void downloadJson(final boolean download, final int id) {
-
-        final ProgressBar progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
-        progressBar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 24));
-        progressBar.setIndeterminate(true);
-
-        final FrameLayout decorView = (FrameLayout) getActivity().getWindow().getDecorView();
-        decorView.addView(progressBar);
-
-        final ViewTreeObserver observer = progressBar.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                progressBar.setY(decorView.findViewById(android.R.id.content).getY() - 14);
-            }
-        });
-
+        refreshLayout.setRefreshing(true);
         new WebpageReaderTask(new WebpageReaderTask.WebpageReaderInterface() {
             @Override
             public void webpageResult(String raw, String html) {
-                decorView.removeView(progressBar);
+                refreshLayout.setRefreshing(false);
                 if (download)
                     startDownload(mJsonDeviceArrays.getDeviceKernels()[id], raw, mJsonDeviceArrays.getKernelJson(kernels.get(id)));
                 else startLog(raw, mJsonDeviceArrays.getKernelJson(kernels.get(id)));
@@ -128,8 +123,7 @@ public class DownloadFragment extends Fragment implements Constants {
             return;
         }
 
-        Intent i = new Intent(getActivity(),
-                DownloadActivity.class);
+        Intent i = new Intent(getActivity(), DownloadActivity.class);
         Bundle args = new Bundle();
         args.putString(DownloadActivity.ARG_KERNEL_NAME, kernel);
         args.putString(DownloadActivity.ARG_JSON, json);
@@ -150,11 +144,9 @@ public class DownloadFragment extends Fragment implements Constants {
             return;
         }
 
-        Intent i = new Intent(getActivity(),
-                MoreActivity.class);
+        Intent i = new Intent(getActivity(), MoreActivity.class);
         Bundle args = new Bundle();
         args.putString(MoreActivity.ARG_JSON, json);
-        args.putString(MoreActivity.ARG_JSON_LINK, link);
         i.putExtras(args);
 
         startActivity(i);
