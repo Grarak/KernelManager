@@ -69,7 +69,21 @@
                 
             ],
             "boot": "/dev/block/omap/omap_hsmmc.1/by-name/boot"
+        },
+        {
+            
+            "codenames": ["kumquat"],
+            "kernels": [
+                {
+                    "name": "BraveKernel",
+                    "json": "https://raw.githubusercontent.com/Garcia98/bravekernel/master/kernelmanager/jsons/kumquat.json",
+                    "description": "BraveKernel for Xperia U by Garcia98" 
+                }
+                
+            ],
+            "boot": "/dev/block/mmcblk0p9"
         }
+
     ]
 
 }
