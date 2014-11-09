@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kernel Manager</string>
+    <string name="navigation_drawer_open">Abrir el menú de navegación</string>
+    <string name="navigation_drawer_close">Cerrar el menú de navegación</string>
+    <string name="ok">Vale</string>
+    <string name="cancel">Cancelar</string>
+    <string name="add">Añadir</string>
+    <string name="no_root">Sin acceso root</string>
+
+    <!-- Units -->
+    <string name="mb">MB</string>
+
+    <!-- Tabs -->
+    <string name="info">Información</string>
+    <string name="download">Descarga</string>
+    <string name="install">Instalación</string>
+    <string name="backup">Copia de seguridad</string>
+
+    <!-- Information -->
+    <string name="support">Soporte</string>
+    <string name="device_supported">Tu dispositivo está soportado</string>
+    <string name="device_not_supported">Tu dispositivo no está soportado</string>
+    <string name="device_not_supported_summary">Por favor, di al desarrollador de tu kernel que añada soporte para esta aplicación</string>
+    <string name="kernel">Kernel</string>
+    <string name="cpu">CPU</string>
+
+    <!-- Download -->
+    <string name="no_description">Sin descripción</string>
+    <string name="loading">Cargando</string>
+    <string name="no_connection">No se puede conectar con el servidor</string>
+    <string name="more">Más</string>
+    <string name="pull_to_refresh">Desliza para actualizar</string>
+    <string name="release_to_refresh">Suelta para actualizar</string>
+    <string name="version">Versión %s</string>
+    <string name="android_version">Versión de Android</string>
+    <string name="no_info_found">No se ha encontrado más información sobre este kernel</string>
+    <string name="download_confirm">¿Deseas descargar %s?</string>
+    <string name="downloading">Descargando %s</string>
+    <string name="download_completed">Descarga completada</string>
+    <string name="download_failed">La descarga ha fallado</string>
+    <string name="download_canceled">Descarga cancelada</string>
+
+    <!-- Install -->
+    <string name="no_install_files">No se han encontrado archivos de instalación</string>
+    <string name="no_install_files_summary">Por favor, descarga algún kernel desde la pestaña de Descargas primero</string>
+    <string name="size">Tamaño</string>
+    <string name="last_modified">Última modificación</string>
+    <string name="flash_now">Instalar ahora</string>
+    <string name="reboot_recovery">Reiniciar al recovery</string>
+    <string name="flash_now_confirm">¡Asegúrate de que el recovery instalado soporta OpenRecoveryScript (p.e. TWRP)!</string>
+    <string name="reboot_recovery_confirm">¿Quieres reiniciar al recovery ahora?</string>
+    <string name="deleted">%s ha sido borrado</string>
+
+    <!-- Backup -->
+    <string name="restore_confirm">¿Quieres restaurar %s?</string>
+    <string name="name_backup">Nombre de la copia de seguridad</string>
+    <string name="no_backup_files">No se han encontrado copias de seguridad</string>
+    <string name="no_backup_files_summary">Para crear una nueva copia de seguridad del kernel, por favor clica en el botón de añadir de la barra superior</string>
+    <string name="create_backup">Creando %s</string>
+    <string name="restore_backup">Restaurando %s</string>
+
+</resources>
