@@ -2,10 +2,11 @@
 
     <!-- inherit from the material theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:colorPrimary">@android:color/holo_red_dark</item>
+        <item name="colorPrimary">@android:color/holo_red_dark</item>
         <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:colorPrimaryDark">@android:color/holo_red_dark</item>
-        <item name="android:colorAccent">@android:color/holo_red_dark</item>
+        <item name="colorPrimaryDark">?attr/colorPrimary</item>
+        <item name="colorAccent">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
     </style>
 
 </resources>

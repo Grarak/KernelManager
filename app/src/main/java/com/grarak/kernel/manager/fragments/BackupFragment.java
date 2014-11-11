@@ -153,6 +153,7 @@ public class BackupFragment extends Fragment implements Constants {
         layout.setOrientation(LinearLayout.VERTICAL);
 
         final EditText nameEdit = new EditText(getActivity());
+        nameEdit.setTextColor(getResources().getColor(android.R.color.black));
         nameEdit.setHint(getString(R.string.name_backup));
         nameEdit.setText(mKernelUtils.getKernelLocalVersion());
         layout.addView(nameEdit);
