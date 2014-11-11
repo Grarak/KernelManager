@@ -179,7 +179,13 @@ public class InstallFragment extends Fragment implements Constants {
     }
 
     private boolean containsFiles() {
-        return new File(download_path).exists() && new File(download_path).listFiles().length > 0;
+        if (!new File(download_path).exists()) return false;
+
+        File[] files = new File(download_path).listFiles();
+        for (File file : files)
+            if (file.getName().endsWith(".zip")) return true;
+
+        return false;
     }
 
 }

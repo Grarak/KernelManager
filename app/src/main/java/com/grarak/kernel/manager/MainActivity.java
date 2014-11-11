@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.grarak.kernel.manager.utils.Constants;
+import com.grarak.kernel.manager.utils.JsonUtils;
 
 
 public class MainActivity extends ActionBarActivity implements Constants {
@@ -74,25 +75,22 @@ public class MainActivity extends ActionBarActivity implements Constants {
     private void selectItem(final int position) {
         mDrawerList.setItemChecked(position, true);
 
-        Fragment fragment;
+        Fragment fragment = mInformationFragment;
 
-        switch (position) {
-            case 0:
-                fragment = mInformationFragment;
-                break;
-            case 1:
-                fragment = mDownloadFragment;
-                break;
-            case 2:
-                fragment = mInstallFragment;
-                break;
-            case 3:
-                fragment = mBackupFragment;
-                break;
-            default:
-                fragment = mInstallFragment;
-                break;
-        }
+        if (position != 0 && !new JsonUtils.JsonDeviceArrays(mUtils.getDeviceAssetFile(MainActivity.this)).isSupported())
+            fragment = mNoSupportFragment;
+        else
+            switch (position) {
+                case 1:
+                    fragment = mDownloadFragment;
+                    break;
+                case 2:
+                    fragment = mInstallFragment;
+                    break;
+                case 3:
+                    fragment = mBackupFragment;
+                    break;
+            }
 
         getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
         mDrawerLayout.closeDrawer(mDrawerList);

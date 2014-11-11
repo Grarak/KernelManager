@@ -6,6 +6,7 @@ import com.grarak.kernel.manager.fragments.BackupFragment;
 import com.grarak.kernel.manager.fragments.DownloadFragment;
 import com.grarak.kernel.manager.fragments.InformationFragment;
 import com.grarak.kernel.manager.fragments.InstallFragment;
+import com.grarak.kernel.manager.fragments.NoSupportFragment;
 
 /**
  * Created by grarak on 11.10.14.
@@ -31,5 +32,6 @@ public interface Constants {
     public final DownloadFragment mDownloadFragment = new DownloadFragment();
     public final InformationFragment mInformationFragment = new InformationFragment();
     public final InstallFragment mInstallFragment = new InstallFragment();
+    public final NoSupportFragment mNoSupportFragment = new NoSupportFragment();
 
 }

@@ -243,7 +243,13 @@ public class BackupFragment extends Fragment implements Constants {
     }
 
     private boolean containsFiles() {
-        return new File(backup_path).exists() && new File(backup_path).listFiles().length > 0;
+        if (!new File(backup_path).exists()) return false;
+
+        File[] files = new File(backup_path).listFiles();
+        for (File file : files)
+            if (file.getName().endsWith(".img")) return true;
+
+        return false;
     }
 
 }
