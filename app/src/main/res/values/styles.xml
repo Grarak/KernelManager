@@ -7,4 +7,8 @@
         <item name="colorAccent">@android:color/holo_red_light</item>
     </style>
 
+    <style name="ButtonStyle">
+        <item name="android:background">@drawable/bg_highlight</item>
+    </style>
+
 </resources>

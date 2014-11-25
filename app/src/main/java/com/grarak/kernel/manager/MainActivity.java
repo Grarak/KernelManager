@@ -92,7 +92,11 @@ public class MainActivity extends ActionBarActivity implements Constants {
                     break;
             }
 
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .commit();
+
         mDrawerLayout.closeDrawer(mDrawerList);
 
         setTitle(mItems[position]);

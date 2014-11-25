@@ -1,12 +1,15 @@
 package com.grarak.kernel.manager.tasks;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.PowerManager;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.grarak.kernel.manager.R;
 import com.grarak.kernel.manager.utils.Constants;
 
@@ -29,7 +32,9 @@ public class DownloadTask extends AsyncTask<String, Integer, String> implements 
 
     private Context context;
     private PowerManager.WakeLock mWakeLock;
-    private ProgressDialog mProgressDialog;
+    private ProgressBar progressBar;
+    private TextView percentText;
+    private MaterialDialog dialogBuilder;
     private final DownloadListener listener;
 
     private final String downloadPath;
@@ -46,41 +51,68 @@ public class DownloadTask extends AsyncTask<String, Integer, String> implements 
     protected void onPreExecute() {
         super.onPreExecute();
 
-        new File(downloadPath).mkdirs();
-
-        mProgressDialog = new ProgressDialog(context);
-        mProgressDialog.setMessage(context.getString(R.string.downloading, downloadFileName));
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setCancelable(true);
-
-        mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                cancel(true);
-                new File(downloadPath + "/" + downloadFileName).delete();
-                listener.downloadFinish(DownloadStatus.CANCELED);
-            }
-        });
-
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, context.getClass().getName());
         mWakeLock.acquire();
-        mProgressDialog.show();
+
+        new File(downloadPath).mkdirs();
+
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        percentText = new TextView(context);
+        percentText.setText("0%");
+        percentText.setGravity(Gravity.RIGHT);
+
+        progressBar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
+        progressBar.setMax(100);
+        progressBar.setIndeterminate(true);
+
+        layout.addView(progressBar);
+        layout.addView(percentText);
+
+        dialogBuilder = new MaterialDialog.Builder(context)
+                .customView(layout)
+                .title(context.getString(R.string.downloading, downloadFileName))
+                .cancelable(false)
+                .neutralText(context.getString(R.string.cancel))
+                .callback(new MaterialDialog.FullCallback() {
+                    @Override
+                    public void onNeutral(MaterialDialog materialDialog) {
+                        cancel();
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog materialDialog) {
+
+                    }
+
+                    @Override
+                    public void onPositive(MaterialDialog materialDialog) {
+
+                    }
+                }).show();
+    }
+
+    private void cancel() {
+        cancel(true);
+        new File(downloadPath + "/" + downloadFileName).delete();
+        listener.downloadFinish(DownloadStatus.CANCELED);
     }
 
     @Override
     protected void onProgressUpdate(Integer... progress) {
         super.onProgressUpdate(progress);
-        mProgressDialog.setIndeterminate(false);
-        mProgressDialog.setMax(100);
-        mProgressDialog.setProgress(progress[0]);
+        progressBar.setIndeterminate(false);
+        progressBar.setMax(100);
+        progressBar.setProgress(progress[0]);
+        percentText.setText(progress[0] + "%");
     }
 
     @Override
     protected void onPostExecute(String result) {
         mWakeLock.release();
-        mProgressDialog.dismiss();
+        dialogBuilder.dismiss();
 
         if (result != null) new File(downloadPath + "/" + downloadFileName).delete();
         listener.downloadFinish(result == null ? DownloadStatus.SUCCESS : DownloadStatus.FAILED);

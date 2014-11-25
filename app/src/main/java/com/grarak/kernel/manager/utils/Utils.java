@@ -1,12 +1,11 @@
 package com.grarak.kernel.manager.utils;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.grarak.kernel.manager.R;
 
 import java.io.BufferedReader;
@@ -29,20 +28,22 @@ public class Utils implements Constants {
     }
 
     public void confirm(Context context, String title, String message, final OnConfirmListener onConfirmListener) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        if (title != null) builder.setTitle(title);
-        if (message != null) builder.setMessage(message);
-        builder.setNegativeButton(context.getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onConfirmListener.onCancel();
-            }
-        }).setPositiveButton(context.getString(R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onConfirmListener.onConfirm();
-            }
-        }).show();
+        MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(context);
+        if (title != null) dialogBuilder.title(title);
+        if (message != null) dialogBuilder.content(message);
+        dialogBuilder.negativeText(context.getString(R.string.cancel))
+                .positiveText(context.getString(R.string.ok))
+                .callback(new MaterialDialog.Callback() {
+                    @Override
+                    public void onNegative(MaterialDialog materialDialog) {
+                        onConfirmListener.onCancel();
+                    }
+
+                    @Override
+                    public void onPositive(MaterialDialog materialDialog) {
+                        onConfirmListener.onConfirm();
+                    }
+                }).show();
     }
 
     public interface OnConfirmListener {

@@ -1,8 +1,10 @@
-package com.grarak.kernel.manager.utils;
+package com.grarak.kernel.manager.tasks;
 
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
+
+import com.grarak.kernel.manager.utils.Constants;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -10,15 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/bg_highlight"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        style="@style/ButtonStyle" />
 
     <Button
-        android:background="@drawable/bg_highlight"
         android:textColor="@android:color/white"
         android:id="@+id/card_expand_button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        style="@style/ButtonStyle" />
 
 </LinearLayout>

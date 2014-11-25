@@ -57,7 +57,7 @@
     <string name="restore_confirm">Do you want to restore %s?</string>
     <string name="name_backup">Name of backup</string>
     <string name="no_backup_files">No backup files found</string>
-    <string name="no_backup_files_summary">To create a new kernel backup please click on the add button in the ActionBar</string>
+    <string name="no_backup_files_summary">To create a new kernel backup please click on the add button down below</string>
     <string name="create_backup">Creating %s</string>
     <string name="restore_backup">Restoring %s</string>
 

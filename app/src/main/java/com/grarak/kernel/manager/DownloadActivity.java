@@ -10,10 +10,10 @@ import android.widget.LinearLayout;
 import com.grarak.kernel.manager.elements.CustomCard.DescriptionCard;
 import com.grarak.kernel.manager.elements.CustomCardArrayAdapter;
 import com.grarak.kernel.manager.tasks.DownloadTask;
+import com.grarak.kernel.manager.tasks.WebpageReaderTask;
 import com.grarak.kernel.manager.utils.Constants;
 import com.grarak.kernel.manager.utils.JsonUtils.JsonDownloadArrays;
 import com.grarak.kernel.manager.utils.Utils;
-import com.grarak.kernel.manager.utils.WebpageReaderTask;
 
 import java.util.ArrayList;
 
@@ -131,8 +131,8 @@ public class DownloadActivity extends ActionBarActivity implements Constants {
     };
 
     private void downloadConfirmation(final int id) {
-        mUtils.confirm(this, null, getString(R.string.download_confirm, KERNEL_NAME + " " +
-                mJsonDownloadArrays.getVersion(id)), new Utils.OnConfirmListener() {
+        mUtils.confirm(this, getString(R.string.download_confirm, KERNEL_NAME + " " +
+                mJsonDownloadArrays.getVersion(id)), null, new Utils.OnConfirmListener() {
             @Override
             public void onConfirm() {
                 new DownloadTask(DownloadActivity.this, new DownloadTask.DownloadListener() {

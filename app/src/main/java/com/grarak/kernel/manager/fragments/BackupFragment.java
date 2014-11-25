@@ -1,20 +1,17 @@
 package com.grarak.kernel.manager.fragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.grarak.kernel.manager.R;
 import com.grarak.kernel.manager.elements.CustomCard;
 import com.grarak.kernel.manager.elements.CustomCardArrayAdapter;
@@ -45,20 +42,12 @@ public class BackupFragment extends Fragment implements Constants {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
         mJsonDeviceArrays = new JsonDeviceArrays(mUtils.getDeviceAssetFile(getActivity()));
 
-        LinearLayout layout = new LinearLayout(getActivity());
+        View rootView = inflater.inflate(R.layout.backup_fragment, container, false);
 
-        refreshLayout = new SwipeRefreshLayout(getActivity());
+        refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.refresh_layout);
         refreshLayout.setColorSchemeColors(getResources().getColor(android.R.color.holo_red_dark));
-
-        layout.addView(refreshLayout);
-
-        listView = new CardListView(getActivity());
-
-        refreshLayout.addView(listView);
-
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -66,9 +55,19 @@ public class BackupFragment extends Fragment implements Constants {
             }
         });
 
+        listView = (CardListView) rootView.findViewById(R.id.card_listview);
+
+        FloatingActionButton backupButton = (FloatingActionButton) rootView.findViewById(R.id.backup_button);
+        backupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backupAlert();
+            }
+        });
+
         getActivity().runOnUiThread(run);
 
-        return layout;
+        return rootView;
     }
 
     private void refresh() {
@@ -99,7 +98,7 @@ public class BackupFragment extends Fragment implements Constants {
                 card.setOnClickListener(new CustomCard.DescriptionCard.CustomOnCardClickListener() {
                     @Override
                     public void onClick(final int id) {
-                        mUtils.confirm(getActivity(), null, getString(R.string.restore_confirm, files()[id]),
+                        mUtils.confirm(getActivity(), getString(R.string.restore_confirm, files()[id]), null,
                                 new Utils.OnConfirmListener() {
                                     @Override
                                     public void onConfirm() {
@@ -135,51 +134,40 @@ public class BackupFragment extends Fragment implements Constants {
         }
     };
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.backup, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_add) backupAlert();
-        return true;
-    }
-
     private void backupAlert() {
-        LinearLayout layout = new LinearLayout(getActivity());
-        layout.setPadding(20, 15, 20, 15);
-        layout.setOrientation(LinearLayout.VERTICAL);
 
         final EditText nameEdit = new EditText(getActivity());
         nameEdit.setTextColor(getResources().getColor(android.R.color.black));
         nameEdit.setHint(getString(R.string.name_backup));
         nameEdit.setText(mKernelUtils.getKernelLocalVersion());
-        layout.addView(nameEdit);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(layout).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        }).setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (RootTools.isAccessGiven())
-                    createBackup(nameEdit.getText().toString().isEmpty() ? mKernelUtils.getKernelLocalVersion()
-                            : nameEdit.getText().toString());
-                else mUtils.toast(getActivity(), getString(R.string.no_root));
-            }
-        }).show();
+        new MaterialDialog.Builder(getActivity())
+                .customView(nameEdit)
+                .negativeText(getString(R.string.cancel))
+                .positiveText(getString(R.string.ok))
+                .callback(new MaterialDialog.Callback() {
+                    @Override
+                    public void onNegative(MaterialDialog materialDialog) {
+                    }
+
+                    @Override
+                    public void onPositive(MaterialDialog materialDialog) {
+                        if (RootTools.isAccessGiven())
+                            createBackup(nameEdit.getText().toString().isEmpty() ? mKernelUtils.getKernelLocalVersion()
+                                    : nameEdit.getText().toString());
+                        else mUtils.toast(getActivity(), getString(R.string.no_root));
+                    }
+                }).show();
 
     }
 
     private void createBackup(final String name) {
         new File(backup_path).mkdirs();
-        final ProgressDialog dialog = new ProgressDialog(getActivity());
-        dialog.setMessage(getString(R.string.create_backup, name + ".img"));
-        dialog.show();
+
+        final MaterialDialog dialogBuilder = new MaterialDialog.Builder(getActivity())
+                .title(getString(R.string.create_backup, name + ".img"))
+                .customView(new ProgressBar(getActivity()))
+                .show();
 
         new Thread(new Runnable() {
             @Override
@@ -189,7 +177,7 @@ public class BackupFragment extends Fragment implements Constants {
                         backup_path.replace(sdcard, "/sdcard") + "/" + name + ".img && touch " + TEMP_FILE);
                 while (true) if (new File(TEMP_FILE).exists()) {
                     mRootUtils.runCommand("rm -f " + TEMP_FILE);
-                    dialog.dismiss();
+                    dialogBuilder.dismiss();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

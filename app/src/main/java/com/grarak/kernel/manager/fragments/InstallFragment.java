@@ -20,7 +20,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.ViewToClickToExpand;
 import it.gmariotti.cardslib.library.view.CardListView;
 
 /**
@@ -95,7 +94,7 @@ public class InstallFragment extends Fragment implements Constants {
                     expand.setOnButtonClickListener(new CardButtonExpand.OnButtonClickListener() {
                         @Override
                         public void onButton1Click() {
-                            mUtils.confirm(getActivity(), null, getString(R.string.reboot_recovery_confirm),
+                            mUtils.confirm(getActivity(), getString(R.string.reboot_recovery_confirm), null,
                                     new Utils.OnConfirmListener() {
                                         @Override
                                         public void onConfirm() {
@@ -113,7 +112,7 @@ public class InstallFragment extends Fragment implements Constants {
 
                         @Override
                         public void onButton2Click() {
-                            mUtils.confirm(getActivity(), null, getString(R.string.flash_now_confirm),
+                            mUtils.confirm(getActivity(), getString(R.string.flash_now_confirm), null,
                                     new Utils.OnConfirmListener() {
                                         @Override
                                         public void onConfirm() {
@@ -132,8 +131,6 @@ public class InstallFragment extends Fragment implements Constants {
                                     });
                         }
                     });
-
-                    card.setViewToClickToExpand(ViewToClickToExpand.builder().setupView(expand.getCardView()));
                     card.addCardExpand(expand);
 
                     cards.add(card);

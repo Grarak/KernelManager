@@ -11,6 +11,7 @@ import com.grarak.kernel.manager.R;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardExpand;
 import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.internal.ViewToClickToExpand;
 
 /**
  * Created by grarak on 11.10.14.
@@ -87,6 +88,8 @@ public class CustomCard {
         @Override
         public void addCardExpand(CardExpand cardExpand) {
             super.addCardExpand(cardExpand);
+
+            setViewToClickToExpand(ViewToClickToExpand.builder().enableForExpandAction());
 
             setOnClickListener(new CustomOnCardClickListener() {
                 @Override

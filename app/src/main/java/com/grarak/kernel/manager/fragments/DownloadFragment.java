@@ -18,13 +18,12 @@ import com.grarak.kernel.manager.elements.CustomCardArrayAdapter;
 import com.grarak.kernel.manager.utils.Constants;
 import com.grarak.kernel.manager.utils.JsonUtils.JsonDeviceArrays;
 import com.grarak.kernel.manager.utils.JsonUtils.JsonListArrays;
-import com.grarak.kernel.manager.utils.WebpageReaderTask;
+import com.grarak.kernel.manager.tasks.WebpageReaderTask;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.ViewToClickToExpand;
 import it.gmariotti.cardslib.library.view.CardListView;
 
 /**
@@ -89,7 +88,6 @@ public class DownloadFragment extends Fragment implements Constants {
                         downloadJson(false, card.getCustomId());
                     }
                 });
-                card.setViewToClickToExpand(ViewToClickToExpand.builder().setupView(cardExpand.getCardView()));
                 card.addCardExpand(cardExpand);
 
                 cards.add(card);
