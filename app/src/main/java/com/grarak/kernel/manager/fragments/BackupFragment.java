@@ -1,7 +1,6 @@
 package com.grarak.kernel.manager.fragments;
 
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -191,9 +190,10 @@ public class BackupFragment extends Fragment implements Constants {
     }
 
     private void restoringBackup(final String imageName) {
-        final ProgressDialog dialog = new ProgressDialog(getActivity());
-        dialog.setMessage(getString(R.string.restore_backup, imageName));
-        dialog.show();
+        final MaterialDialog dialogBuilder = new MaterialDialog.Builder(getActivity())
+                .title(getString(R.string.restore_backup, imageName))
+                .customView(new ProgressBar(getActivity()))
+                .show();
 
         new Thread(new Runnable() {
             @Override
@@ -203,7 +203,7 @@ public class BackupFragment extends Fragment implements Constants {
                         + " of=" + mJsonDeviceArrays.getBootPartition() + " && touch " + TEMP_FILE);
                 while (true) if (new File(TEMP_FILE).exists()) {
                     mRootUtils.runCommand("rm -f " + TEMP_FILE);
-                    dialog.dismiss();
+                    dialogBuilder.dismiss();
                     break;
                 }
             }

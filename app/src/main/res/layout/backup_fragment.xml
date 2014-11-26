@@ -22,7 +22,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        fab:fab_colorNormal="@android:color/holo_red_light"
+        fab:fab_colorNormal="?attr/colorPrimary"
         fab:fab_colorPressed="?attr/colorAccent"
         fab:fab_icon="@drawable/ic_plus"
         android:layout_marginBottom="16dp"

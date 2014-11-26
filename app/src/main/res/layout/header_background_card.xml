@@ -9,7 +9,7 @@
     android:minHeight="60dp"
     android:gravity="center_vertical"
     style="@style/card"
-    android:background="@android:color/holo_red_light" />
+    android:background="?attr/colorPrimary" />
 
 
 

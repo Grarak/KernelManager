@@ -1,8 +1,12 @@
 package com.grarak.kernel.manager.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.util.Log;
+import android.util.TypedValue;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -53,7 +57,27 @@ public class Utils implements Constants {
     }
 
     public void toast(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        Toast toast = new Toast(context);
+        toast.setDuration(Toast.LENGTH_LONG);
+
+        LinearLayout layout = new LinearLayout(context);
+
+        layout.setBackgroundColor(getAttrColor(context, R.attr.colorPrimary));
+        layout.setPadding(30, 20, 30, 20);
+        TextView text = new TextView(context);
+        text.setTextColor(context.getResources().getColor(android.R.color.white));
+        layout.addView(text);
+        text.setTextSize(15);
+        text.setText(message);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    public int getAttrColor(Context context, int attr) {
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = context.getTheme();
+        theme.resolveAttribute(attr, typedValue, true);
+        return typedValue.data;
     }
 
     public String readFile(String filepath) {
