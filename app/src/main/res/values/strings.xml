@@ -18,6 +18,9 @@
     <string name="install">Install</string>
     <string name="backup">Backup</string>
 
+    <!-- OTA -->
+    <string name="new_download">New downloads for %s found</string>
+
     <!-- Information -->
     <string name="support">Support</string>
     <string name="device_supported">Your device is supported</string>
@@ -27,6 +30,7 @@
     <string name="cpu">CPU</string>
 
     <!-- Download -->
+    <string name="ota">OTA</string>
     <string name="no_description">No description</string>
     <string name="loading">Loading</string>
     <string name="no_connection">Cannot connect to server</string>

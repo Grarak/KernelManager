@@ -22,7 +22,7 @@ import com.grarak.kernel.manager.utils.JsonUtils.JsonListArrays;
 /**
  * Created by grarak on 13.10.14.
  */
-public class MoreActivity extends ActionBarActivity {
+public class LogActivity extends ActionBarActivity {
 
     private ViewPager mViewPager;
 

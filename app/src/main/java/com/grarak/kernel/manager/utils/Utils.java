@@ -50,6 +50,26 @@ public class Utils implements Constants {
                 }).show();
     }
 
+    public int getInteger(String name, int defaults, Context context) {
+        Log.i(TAG, "getting " + name);
+        return context.getSharedPreferences(PREF_NAME, 0).getInt(name, defaults);
+    }
+
+    public void saveInteger(String name, int value, Context context) {
+        Log.i(TAG, "saving " + name + " as " + value);
+        context.getSharedPreferences(PREF_NAME, 0).edit().putInt(name, value).commit();
+    }
+
+    public boolean getBoolean(String name, boolean defaults, Context context) {
+        Log.i(TAG, "getting " + name);
+        return context.getSharedPreferences(PREF_NAME, 0).getBoolean(name, defaults);
+    }
+
+    public void saveBoolean(String name, boolean value, Context context) {
+        Log.i(TAG, "saving " + name + " as " + value);
+        context.getSharedPreferences(PREF_NAME, 0).edit().putBoolean(name, value).commit();
+    }
+
     public interface OnConfirmListener {
         public void onConfirm();
 

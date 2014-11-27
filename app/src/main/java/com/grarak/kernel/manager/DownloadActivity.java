@@ -84,7 +84,7 @@ public class DownloadActivity extends ActionBarActivity implements Constants {
             cards.clear();
 
             if (refresh)
-                new WebpageReaderTask(new WebpageReaderTask.WebpageReaderInterface() {
+                new WebpageReaderTask(new WebpageReaderTask.WebpageListener() {
                     @Override
                     public void webpageResult(String raw, String html) {
                         mJsonDownloadArrays = new JsonDownloadArrays(raw);

@@ -24,10 +24,18 @@
         </activity>
         <activity
             android:name=".DownloadActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".MoreActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:name=".LogActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <receiver android:name=".services.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".services.OTAService" />
     </application>
 
 </manifest>

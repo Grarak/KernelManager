@@ -1,8 +1,23 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:textSize="13dp"
-    android:padding="15dp"
-    android:id="@+id/card_description_text"
-    android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:textColor="@android:color/black" />
+    android:orientation="horizontal"
+    android:padding="15dp">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:textSize="13dp"
+        android:id="@+id/card_description_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_weight="1" />
+
+    <CheckBox
+        android:id="@+id/card_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/ota" />
+
+</LinearLayout>

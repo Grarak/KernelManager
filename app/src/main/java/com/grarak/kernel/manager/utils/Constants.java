@@ -14,7 +14,11 @@ import com.grarak.kernel.manager.fragments.NoSupportFragment;
 public interface Constants {
 
     public final String TAG = "Kernel Manager";
+    public final String PREF_NAME = "prefs";
     public final String TEMP_FILE = "/data/local/tmp/kernelmanagertmp";
+
+    // In hours
+    public final int OTA_TIME = 6;
 
     public final String KERNEL_VERSION = "/proc/version";
     public final String CPU_INFO = "/proc/cpuinfo";

@@ -18,10 +18,10 @@ import java.net.URL;
  */
 public class WebpageReaderTask extends AsyncTask<String, Void, String> implements Constants {
 
-    private final WebpageReaderInterface webpageReaderInterface;
+    private final WebpageListener webpageListener;
 
-    public WebpageReaderTask(WebpageReaderInterface webpageReaderInterface) {
-        this.webpageReaderInterface = webpageReaderInterface;
+    public WebpageReaderTask(WebpageListener webpageListener) {
+        this.webpageListener = webpageListener;
     }
 
     @Override
@@ -55,10 +55,10 @@ public class WebpageReaderTask extends AsyncTask<String, Void, String> implement
 
     @Override
     protected void onPostExecute(String result) {
-        webpageReaderInterface.webpageResult(result, Html.fromHtml(result).toString());
+        webpageListener.webpageResult(result, Html.fromHtml(result).toString());
     }
 
-    public interface WebpageReaderInterface {
+    public interface WebpageListener {
         public void webpageResult(String raw, String html);
     }
 

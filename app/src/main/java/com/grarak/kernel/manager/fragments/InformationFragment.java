@@ -1,6 +1,7 @@
 package com.grarak.kernel.manager.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import com.grarak.kernel.manager.R;
 import com.grarak.kernel.manager.elements.CustomCard.DescriptionCard;
 import com.grarak.kernel.manager.elements.CustomCardArrayAdapter;
+import com.grarak.kernel.manager.services.OTAService;
 import com.grarak.kernel.manager.utils.Constants;
 import com.grarak.kernel.manager.utils.JsonUtils.JsonDeviceArrays;
 
@@ -29,7 +31,6 @@ public class InformationFragment extends Fragment implements Constants {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         listView = new CardListView(getActivity());
-        mJsonDevicesArrays = new JsonDeviceArrays(mUtils.getDeviceAssetFile(getActivity()));
 
         getActivity().runOnUiThread(run);
 
@@ -40,24 +41,19 @@ public class InformationFragment extends Fragment implements Constants {
         @Override
         public void run() {
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-
             ArrayList<Card> cards = new ArrayList<Card>();
+
+            mJsonDevicesArrays = new JsonDeviceArrays(mUtils.getDeviceAssetFile(getActivity()));
 
             DescriptionCard supportCard = new DescriptionCard(getActivity());
             supportCard.setTitle(getString(R.string.support));
-            supportCard.setDescription(mJsonDevicesArrays.isSupported() ?
-                    getString(R.string.device_supported) + " (" + mUtils.getDeviceCodename() + ")" :
-                    getString(R.string.device_not_supported) + " (" + mUtils.getDeviceCodename() + ")");
+
+            if (mJsonDevicesArrays.isSupported()) {
+                supportCard.setDescription(getString(R.string.device_supported) + " (" + mUtils.getDeviceCodename() + ")");
+                getActivity().startService(new Intent(getActivity(), OTAService.class));
+            } else
+                supportCard.setDescription(getString(R.string.device_not_supported) + " (" + mUtils.getDeviceCodename() + ")");
+
             cards.add(supportCard);
 
             DescriptionCard kernelCard = new DescriptionCard(getActivity());

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.grarak.kernel.manager.R;
@@ -24,7 +25,12 @@ public class CustomCard {
         private int id = 0;
 
         private TextView descriptionView;
+        private CheckBox checkBoxView;
         private String mDescription;
+        private boolean checkBoxEnabled;
+        private boolean checkBoxChecked;
+
+        private CustomCheckBoxListener onCheckBoxListener;
 
         public DescriptionCard(Context context) {
             super(context, R.layout.description_inner_card);
@@ -43,6 +49,15 @@ public class CustomCard {
                 descriptionView.setText(mDescription);
         }
 
+        public void setChecked(boolean checked) {
+            checkBoxEnabled = true;
+            checkBoxChecked = checked;
+            if (checkBoxView != null) {
+                checkBoxView.setVisibility(View.VISIBLE);
+                checkBoxView.setChecked(checkBoxChecked);
+            }
+        }
+
         public void setId(int id) {
             this.id = id;
         }
@@ -57,6 +72,19 @@ public class CustomCard {
 
             descriptionView = (TextView) view.findViewById(R.id.card_description_text);
             if (mDescription != null) descriptionView.setText(mDescription);
+
+            checkBoxView = (CheckBox) view.findViewById(R.id.card_checkbox);
+            if (checkBoxEnabled) checkBoxView.setVisibility(View.VISIBLE);
+            checkBoxView.setChecked(checkBoxChecked);
+
+            if (onCheckBoxListener != null)
+                checkBoxView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        checkBoxChecked = checkBoxView.isChecked();
+                        onCheckBoxListener.onClick(checkBoxView.isChecked(), id);
+                    }
+                });
         }
 
         public void setOnClickListener(final CustomOnCardClickListener onCardClickListener) {
@@ -77,12 +105,22 @@ public class CustomCard {
             });
         }
 
+        public void setCheckBoxListener(final CustomCheckBoxListener onCheckBoxListener) {
+            checkBoxEnabled = true;
+            if (checkBoxView != null) checkBoxView.setVisibility(View.VISIBLE);
+            this.onCheckBoxListener = onCheckBoxListener;
+        }
+
         public interface CustomOnCardClickListener {
             public void onClick(int id);
         }
 
         public interface CustomOnSwipeListener {
             public void onSwipe(int id);
+        }
+
+        public interface CustomCheckBoxListener {
+            public void onClick(boolean checked, int id);
         }
 
         @Override

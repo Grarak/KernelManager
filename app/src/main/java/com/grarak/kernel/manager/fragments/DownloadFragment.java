@@ -10,15 +10,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.grarak.kernel.manager.DownloadActivity;
-import com.grarak.kernel.manager.MoreActivity;
+import com.grarak.kernel.manager.LogActivity;
 import com.grarak.kernel.manager.R;
 import com.grarak.kernel.manager.elements.CustomCard.CardButtonExpand;
 import com.grarak.kernel.manager.elements.CustomCard.DescriptionCard;
 import com.grarak.kernel.manager.elements.CustomCardArrayAdapter;
+import com.grarak.kernel.manager.tasks.WebpageReaderTask;
 import com.grarak.kernel.manager.utils.Constants;
 import com.grarak.kernel.manager.utils.JsonUtils.JsonDeviceArrays;
 import com.grarak.kernel.manager.utils.JsonUtils.JsonListArrays;
-import com.grarak.kernel.manager.tasks.WebpageReaderTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +72,13 @@ public class DownloadFragment extends Fragment implements Constants {
                 card.setTitle(mJsonDeviceArrays.getDeviceKernels()[i]);
                 String description = mJsonDeviceArrays.getKernelDescription(mJsonDeviceArrays.getDeviceKernels()[i]);
                 card.setDescription(description == null ? getString(R.string.no_description) : description);
+                card.setChecked(mUtils.getBoolean(mJsonDeviceArrays.getDeviceKernels()[i], false, getActivity()));
+                card.setCheckBoxListener(new DescriptionCard.CustomCheckBoxListener() {
+                    @Override
+                    public void onClick(boolean checked, int id) {
+                        mUtils.saveBoolean(mJsonDeviceArrays.getDeviceKernels()[id], checked, getActivity());
+                    }
+                });
                 card.setId(i);
 
                 CardButtonExpand cardExpand = new CardButtonExpand(getActivity());
@@ -103,13 +110,13 @@ public class DownloadFragment extends Fragment implements Constants {
 
     private void downloadJson(final boolean download, final int id) {
         refreshLayout.setRefreshing(true);
-        new WebpageReaderTask(new WebpageReaderTask.WebpageReaderInterface() {
+        new WebpageReaderTask(new WebpageReaderTask.WebpageListener() {
             @Override
             public void webpageResult(String raw, String html) {
                 refreshLayout.setRefreshing(false);
                 if (download)
                     startDownload(mJsonDeviceArrays.getDeviceKernels()[id], raw, mJsonDeviceArrays.getKernelJson(kernels.get(id)));
-                else startLog(raw, mJsonDeviceArrays.getKernelJson(kernels.get(id)));
+                else startLog(raw);
             }
         }).execute(mJsonDeviceArrays.getKernelJson(kernels.get(id)));
     }
@@ -131,7 +138,7 @@ public class DownloadFragment extends Fragment implements Constants {
         startActivity(i);
     }
 
-    private void startLog(String json, String link) {
+    private void startLog(String json) {
         if (!new JsonListArrays(json).isUseable()) {
             mUtils.toast(getActivity(), getString(R.string.no_info_found));
             return;
@@ -142,9 +149,9 @@ public class DownloadFragment extends Fragment implements Constants {
             return;
         }
 
-        Intent i = new Intent(getActivity(), MoreActivity.class);
+        Intent i = new Intent(getActivity(), LogActivity.class);
         Bundle args = new Bundle();
-        args.putString(MoreActivity.ARG_JSON, json);
+        args.putString(LogActivity.ARG_JSON, json);
         i.putExtras(args);
 
         startActivity(i);

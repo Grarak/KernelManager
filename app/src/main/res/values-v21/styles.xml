@@ -5,7 +5,7 @@
         <item name="colorPrimary">@android:color/holo_red_light</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="colorPrimaryDark">@android:color/holo_red_dark</item>
-        <item name="colorAccent">@android:color/holo_red_dark</item>
+        <item name="colorAccent">?attr/colorPrimary</item>
     </style>
 
 </resources>
