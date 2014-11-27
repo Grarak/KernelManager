@@ -8,8 +8,8 @@ android {
         applicationId "com.grarak.kernel.manager"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 9
-        versionName "0.1.9"
+        versionCode 10
+        versionName "0.2"
     }
     buildTypes {
         release {
