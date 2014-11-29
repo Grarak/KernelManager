@@ -23,7 +23,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         fab:fab_colorNormal="?attr/colorPrimary"
-        fab:fab_colorPressed="?attr/colorAccent"
+        fab:fab_colorPressed="?attr/colorPrimaryDark"
         fab:fab_icon="@drawable/ic_plus"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"

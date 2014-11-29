@@ -1,10 +1,8 @@
 package com.grarak.kernel.manager.utils;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Build;
 import android.util.Log;
-import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,7 +80,7 @@ public class Utils implements Constants {
 
         LinearLayout layout = new LinearLayout(context);
 
-        layout.setBackgroundColor(getAttrColor(context, R.attr.colorPrimary));
+        layout.setBackgroundColor(context.getResources().getColor(android.R.color.holo_red_light));
         layout.setPadding(30, 20, 30, 20);
         TextView text = new TextView(context);
         text.setTextColor(context.getResources().getColor(android.R.color.white));
@@ -91,13 +89,6 @@ public class Utils implements Constants {
         text.setText(message);
         toast.setView(layout);
         toast.show();
-    }
-
-    public int getAttrColor(Context context, int attr) {
-        TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = context.getTheme();
-        theme.resolveAttribute(attr, typedValue, true);
-        return typedValue.data;
     }
 
     public String readFile(String filepath) {
