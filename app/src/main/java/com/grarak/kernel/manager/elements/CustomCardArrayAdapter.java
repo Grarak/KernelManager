@@ -19,14 +19,10 @@ import it.gmariotti.cardslib.library.view.CardView;
  */
 public class CustomCardArrayAdapter extends CardArrayAdapter {
 
-    private final Context context;
     private int count = 0;
-    private final List<Card> cards;
 
     public CustomCardArrayAdapter(Context context, List<Card> cards) {
         super(context, cards);
-        this.context = context;
-        this.cards = cards;
     }
 
     @Override
@@ -35,9 +31,9 @@ public class CustomCardArrayAdapter extends CardArrayAdapter {
 
         CardView mCardView = (CardView) view.findViewById(it.gmariotti.cardslib.library.R.id.list_cardId);
 
-        if (count < cards.size()) {
+        if (count < getCount()) {
             DisplayMetrics metrics = new DisplayMetrics();
-            ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
             Animation animation = new TranslateAnimation(0, 0, metrics.heightPixels / 3, 0);
             animation.setDuration(250 * (count + 1));
