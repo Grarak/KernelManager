@@ -114,6 +114,12 @@ public class DownloadFragment extends Fragment implements Constants {
             @Override
             public void webpageResult(String raw, String html) {
                 refreshLayout.setRefreshing(false);
+
+                if (raw.isEmpty()) {
+                    mUtils.toast(getActivity(), getString(R.string.no_connection));
+                    return;
+                }
+
                 if (download)
                     startDownload(mJsonDeviceArrays.getDeviceKernels()[id], raw, mJsonDeviceArrays.getKernelJson(kernels.get(id)));
                 else startLog(raw);
@@ -122,12 +128,6 @@ public class DownloadFragment extends Fragment implements Constants {
     }
 
     private void startDownload(String kernel, String json, String link) {
-
-        if (json.isEmpty()) {
-            mUtils.toast(getActivity(), getString(R.string.no_connection));
-            return;
-        }
-
         Intent i = new Intent(getActivity(), DownloadActivity.class);
         Bundle args = new Bundle();
         args.putString(DownloadActivity.ARG_KERNEL_NAME, kernel);
@@ -141,11 +141,6 @@ public class DownloadFragment extends Fragment implements Constants {
     private void startLog(String json) {
         if (!new JsonListArrays(json).isUseable()) {
             mUtils.toast(getActivity(), getString(R.string.no_info_found));
-            return;
-        }
-
-        if (json.isEmpty()) {
-            mUtils.toast(getActivity(), getString(R.string.no_connection));
             return;
         }
 
