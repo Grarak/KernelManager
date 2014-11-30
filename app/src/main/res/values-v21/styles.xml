@@ -8,4 +8,8 @@
         <item name="colorAccent">?attr/colorPrimary</item>
     </style>
 
+    <style name="ButtonStyle">
+        <item name="android:background">@drawable/bg_highlight</item>
+    </style>
+
 </resources>
