@@ -82,6 +82,45 @@
                 
             ],
             "boot": "/dev/block/mmcblk0p9"
+        },
+        {
+            
+            "codenames": ["nypon"],
+            "kernels": [
+                {
+                    "name": "BraveKernel",
+                    "json": "https://raw.githubusercontent.com/Garcia98/bravekernel/master/kernelmanager/jsons/nypon.json",
+                    "description": "BraveKernel for Xperia P by Garcia98" 
+                }
+                
+            ],
+            "boot": "/dev/block/mmcblk0p9"
+        },
+        {
+            
+            "codenames": ["pepper"],
+            "kernels": [
+                {
+                    "name": "BraveKernel",
+                    "json": "https://raw.githubusercontent.com/Garcia98/bravekernel/master/kernelmanager/jsons/pepper.json",
+                    "description": "BraveKernel for Xperia Sola by Garcia98" 
+                }
+                
+            ],
+            "boot": "/dev/block/mmcblk0p9"
+        },
+        {
+            
+            "codenames": ["lotus"],
+            "kernels": [
+                {
+                    "name": "BraveKernel",
+                    "json": "https://raw.githubusercontent.com/Garcia98/bravekernel/master/kernelmanager/jsons/lotus.json",
+                    "description": "BraveKernel for Xperia Go by Garcia98" 
+                }
+                
+            ],
+            "boot": "/dev/block/mmcblk0p9"
         }
 
     ]
